@@ -1,0 +1,39 @@
+To get your Google Maps API key, you need to use the Google Cloud Console. Since you are already in the Google Cloud environment, here are the exact steps to generate and secure one:
+1. Create or Select a Project
+
+    Go to the Google Cloud Console .
+    At the top left, click the project dropdown and select the project you want to use (or create a new one).
+
+2. Enable the Places API
+
+Before you can get a key, you must enable the specific API for your project:
+
+    In the search bar at the top, type "Places API".
+    Select Places API (not the "Legacy" one if you want to use the code I provided).
+    Click the Enable button.
+
+3. Create the API Key
+
+    In the left-hand menu, go to APIs & Services > Credentials.
+    Click + Create Credentials at the top of the page.
+    Select API key.
+    A dialog will appear showing your new API key. Copy this key and paste it into your .env file.
+
+4. Important: Secure Your Key (Restriction)
+
+To prevent others from using your key (which could cost you money), you should restrict it immediately:
+
+    On the same Credentials page, click the name of the key you just created.
+    Under API restrictions, select Restrict key.
+    In the dropdown, check only the Places API.
+    (Optional but recommended) Under Application restrictions, select IP addresses (if running a backend server) or Websites (if calling from a browser) to ensure only your app can use the key.
+    Click Save.
+
+5. Enable Billing
+
+Google Maps Platform requires an active billing account even though they provide a $200 free monthly credit (which covers thousands of requests).
+
+    Go to the Billing section in the console.
+    Ensure a credit card or bank account is linked to the project.
+
+Would you like me to check if you already have the Places API enabled in your current project?

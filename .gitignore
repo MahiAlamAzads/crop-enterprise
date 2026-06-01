@@ -1,0 +1,58 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+build/
+.out/
+
+# TypeScript
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Env files
+.env
+.env.*
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db
+.desktop.ini
+
+# Editor/IDE
+.vscode/
+.idea/
+
+# Cache
+.cache/
+.cache-loader/
+
+# Next/Nuxt/out
+.next/
+.nuxt/
+out/
+
+# Coverage
+coverage/
+
+# Misc
+*.tgz
+
+# Local runtime files
+pids/
+*.pid
+
+# Ignore secrets and keys
+secrets/
+keys/
+
+# Optional: ignore local credential stores
+.credentials

@@ -1,0 +1,63 @@
+import express, { Request, Response } from 'express';
+import axios from 'axios';
+import dotenv from 'dotenv';
+
+// 1. Initialize environment variables
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+const API_KEY = process.env.GOOGLE_MAPS_API_KEY;
+
+// 2. Middleware to parse JSON
+app.use(express.json());
+
+// 3. The API Endpoint
+app.get('/agro-nearby', async (req: Request, res: Response) => {
+  const { lat, lng } = req.query;
+
+  if (!lat || !lng) {
+    return res.status(400).json({ error: "Please provide lat and lng coordinates." });
+  }
+
+  try {
+    // We explicitly request the 'Contact' fields you wanted (phone, website, hours)
+    const fieldMask = [
+      'places.displayName',
+      'places.formattedAddress',
+      'places.nationalPhoneNumber', // Essential info
+      'places.websiteUri',         // Essential info
+      'places.regularOpeningHours', // Essential info
+      'places.rating'
+    ].join(',');
+
+    const response = await axios.post(
+      'https://places.googleapis.com/v1/places:searchNearby',
+      {
+        locationRestriction: {
+          circle: {
+            center: { latitude: parseFloat(lat as string), longitude: parseFloat(lng as string) },
+            radius: 5000.0 // 5km search radius
+          }
+        },
+        textQuery: "agro farm supply agriculture"
+      },
+      {
+        headers: {
+          'X-Goog-Api-Key': API_KEY,
+          'X-Goog-FieldMask': fieldMask,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+
+    res.json(response.data);
+  } catch (error: any) {
+    console.error("Google API Error:", error.response?.data || error.message);
+    res.status(500).json({ error: "Failed to fetch agricultural businesses." });
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`✅ Server is running on port ${PORT}`);
+});
