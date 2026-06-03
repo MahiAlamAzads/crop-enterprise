@@ -4,7 +4,7 @@ export class GooglePlacesService {
   async findNearestAgro(input: NearestAgroInput) {
     // const apiKey =
     //   process.env["GOOGLE_MAPS_API_KEY"] ?? process.env["GOOGLE_API_KEY"];
-    const apiKey = "AIzaSyCsq5uuSox8lsiZ3n-TPqXukKE3CjpPNBU"
+    const apiKey = process.env["GOOGLE_MAPS_API_KEY"];
     if (!apiKey) throw new Error("Missing GOOGLE_MAPS_API_KEY");
 
     const response = await fetch(
